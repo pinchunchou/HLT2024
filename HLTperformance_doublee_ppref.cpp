@@ -3,47 +3,12 @@
 #include "/eos/cms/store/group/phys_heavyions_ops/pchou/ElectroWeak-Jet-Track-Analyses/TreeHeaders/hltObjectTree.h"
 #include "tdrstyle.C"
 #include "CMS_lumi.C"
-void style(){
 
-  gROOT->SetStyle("Plain");
-  gStyle->SetPalette(1);
-  gStyle->SetPadTickX(1);
-  gStyle->SetPadTickY(1);
-  gStyle->SetLabelFont(43,"xyz");
-  gStyle->SetTitleFont(43);
-  gStyle->SetTitleFont(43,"xyz");
-  gStyle->SetStatFont(43);
-
-  gStyle->SetFrameFillColor(kWhite);
-  gStyle->SetCanvasColor(kWhite);
-  gStyle->SetOptStat(0); /*don't show statistics box*/
-  gStyle->SetOptTitle(0); /*don't show histogram titles*/
-  gStyle->SetTitleSize(48, "xyz");
-  gStyle->SetTitleOffset(1, "xyz");
-  gStyle->SetLabelSize(36, "xyz");
-  gStyle->SetLegendBorderSize(0);
-  gStyle->SetLegendFillColor(kWhite);
-
-  gStyle->SetPadTopMargin(0.05);
-  gStyle->SetPadBottomMargin(0.15);
-  gStyle->SetPadLeftMargin(0.15);
-  gStyle->SetPadRightMargin(0.05);
-
-  gStyle->SetLineScalePS(1.5);
-
-  gROOT->ForceStyle();
-}
-/*
-float findNcoll(int hiBin) {
-   const int nbins = 200;
-   const float Ncoll[nbins] = {1976.95, 1944.02, 1927.29, 1891.9, 1845.3, 1807.2, 1760.45, 1729.18, 1674.8, 1630.3, 1590.52, 1561.72, 1516.1, 1486.5, 1444.68, 1410.88, 1376.4, 1347.32, 1309.71, 1279.98, 1255.31, 1219.89, 1195.13, 1165.96, 1138.92, 1113.37, 1082.26, 1062.42, 1030.6, 1009.96, 980.229, 955.443, 936.501, 915.97, 892.063, 871.289, 847.364, 825.127, 806.584, 789.163, 765.42, 751.187, 733.001, 708.31, 690.972, 677.711, 660.682, 640.431, 623.839, 607.456, 593.307, 576.364, 560.967, 548.909, 530.475, 519.575, 505.105, 490.027, 478.133, 462.372, 451.115, 442.642, 425.76, 416.364, 405.154, 392.688, 380.565, 371.167, 360.28, 348.239, 340.587, 328.746, 320.268, 311.752, 300.742, 292.172, 281.361, 274.249, 267.025, 258.625, 249.931, 240.497, 235.423, 228.63, 219.854, 214.004, 205.425, 199.114, 193.618, 185.644, 180.923, 174.289, 169.641, 161.016, 157.398, 152.151, 147.425, 140.933, 135.924, 132.365, 127.017, 122.127, 117.817, 113.076, 109.055, 105.16, 101.323, 98.098, 95.0548, 90.729, 87.6495, 84.0899, 80.2237, 77.2201, 74.8848, 71.3554, 68.7745, 65.9911, 63.4136, 61.3859, 58.1903, 56.4155, 53.8486, 52.0196, 49.2921, 47.0735, 45.4345, 43.8434, 41.7181, 39.8988, 38.2262, 36.4435, 34.8984, 33.4664, 31.8056, 30.351, 29.2074, 27.6924, 26.7754, 25.4965, 24.2802, 22.9651, 22.0059, 21.0915, 19.9129, 19.1041, 18.1487, 17.3218, 16.5957, 15.5323, 14.8035, 14.2514, 13.3782, 12.8667, 12.2891, 11.61, 11.0026, 10.3747, 9.90294, 9.42648, 8.85324, 8.50121, 7.89834, 7.65197, 7.22768, 6.7755, 6.34855, 5.98336, 5.76555, 5.38056, 5.11024, 4.7748, 4.59117, 4.23247, 4.00814, 3.79607, 3.68702, 3.3767, 3.16309, 2.98282, 2.8095, 2.65875, 2.50561, 2.32516, 2.16357, 2.03235, 1.84061, 1.72628, 1.62305, 1.48916, 1.38784, 1.28366, 1.24693, 1.18552, 1.16085, 1.12596, 1.09298, 1.07402, 1.06105, 1.02954};
-   return Ncoll[hiBin];
-}
-*/
 void HLTperformance_doublee_ppref(){
 
   bool isMass50 = false;
   bool isVerbose = false;
+
   //string typeofdata = "doublee_ppref_1400v60v2_EG10_dr05";
   string typeofdata = "doublee_ppref_1400v60v2_dr05";
 
@@ -63,7 +28,6 @@ void HLTperformance_doublee_ppref(){
   vector<string> triggers = vector<string>{"HLT_PPRefDoubleEle15Gsf" + Mass50txt + "_v","HLT_PPRefEle15Ele10Gsf" + Mass50txt + "_v","HLT_PPRefDoubleEle10Gsf" + Mass50txt + "_v"};
   vector<string> trigger_names = vector<string>{"HLT Double Ele 15 Gsf " + Mass50txt, "HLT ppref Ele 15 Ele 10 Gsf" + Mass50txt, "HLT ppref Double Ele 10 Gsf" + Mass50txt}; 
 
-
   //string filebase = "/data/submit/pinchun/HLT2024/";
   string filebase = "/eos/cms/store/group/phys_heavyions_ops/pchou/";
 
@@ -74,36 +38,14 @@ void HLTperformance_doublee_ppref(){
   string hltfile = filebase + hltfilebase + "openHLT_ppref_MC_Zee_1400v60v2_20240531.root";
   //string hltfile = filebase + hltfilebase + "openHLT_ppref_MC_Zee_1400v60v2_EG10_20240531.root";
 
-
-  //style();
   setTDRStyle();
   gStyle->SetLegendBorderSize(0);
 
-
   writeExtraText = true;       // if extra text
-  extraText  = "Preliminary";  // default extra text is "Preliminary"
-  lumi_8TeV  = "19.1 fb^{-1}"; // default is "19.7 fb^{-1}"
-  lumi_7TeV  = "4.9 fb^{-1}";  // default is "5.1 fb^{-1}"
-  lumi_sqrtS = "13 TeV";       // used with iPeriod = 0, e.g. for simulation-only plots (default is an empty string)
-
   int iPeriod = 0;    // 1=7TeV, 2=8TeV, 3=7+8TeV, 7=7+8+13TeV, 0=free form (uses lumi_sqrtS)
-
   int iPos=11;
+  lumi_sqrtS = "pp ref, #sqrt{s_{NN}} = 5.36 TeV, 2024 Simulation";
   
-
-  //TFile::Open("/data/submit/pinchun/Zee_geom.root");
-
-  //string hltfile = "/eos/cms/store/group/phys_heavyions/soohwan/Run3_2023/HLT/Merged/ppRef/openHLT_Zee_Dener_v9.root";
-  
-  //ZB
-  //string hltfile = "~/eos/HLT_DIGI_CMSSW1321/ppref_MC_Zee_ZB/Macro/CRAB_UserFiles/ppref_MC_Zee_ZB_L1v1_0_0_Macro/230906_192100/0000/*.root";
-
-  //string frtfile = "~/eos/HIRECO_MINIAOD_CMSSW1321/ppref_MC_ZeePU/Zee_TuneCP5_5p36TeV_ppref-pythia8_final_2M/Zee_TuneCP5_5p36TeV_ppref-pythia8_new_mAOD/230821_123934/0000/*.root";
-  //string hltfile = "~/eos/HLT_DIGI_CMSSW1321/ppref_MC_Zee_1320V32/Macro/CRAB_UserFiles/ppref_MC_Zee_1320V32_Macro/230908_171528/0000/*.root";
-
-  //tag132X2023
-  //string hltfile = "~/eos_base/HLT_DIGI_CMSSW1321/ppref_MC_Zee_1320V32/Macro/CRAB_UserFiles/ppref_MC_Zee_1320V32_tag132X2023_Macro/230911_112331/0000/*.root";
-
   TChain *HltTree = new TChain("hltanalysis/HltTree");
   HltTree->Add(hltfile.c_str());
   TChain *EventTree = new TChain("ggHiNtuplizer/EventTree");
@@ -120,15 +62,10 @@ void HLTperformance_doublee_ppref(){
   TChain *Tree10 = new TChain(("hltobject/" + triggers[0] ).c_str());
   TChain *Tree15 = new TChain(("hltobject/" + triggers[1] ).c_str());
   TChain *Tree20 = new TChain(("hltobject/" + triggers[2] ).c_str());
-  
 
   Tree10->Add(hltfile.c_str());
   Tree15->Add(hltfile.c_str());
   Tree20->Add(hltfile.c_str());
-  
-  //HltTree->Scan("HLT_PPRefDoubleEle15Gsf_v:HLT_PPRefDoubleEle15GsfMass50_v:HLT_PPRefEle15Ele10Gsf_v:
-  //HLT_PPRefEle15Ele10GsfMass50_v:HLT_PPRefDoubleEle10Gsf_v:HLT_PPRefDoubleEle10GsfMass50_v")
-
 
   TH1F* hdenom   = new TH1F("hdenom","",pt_bin,pt_min,pt_max);
   TH1F* hnum10   = new TH1F("hnum10","",pt_bin,pt_min,pt_max);
@@ -161,13 +98,6 @@ void HLTperformance_doublee_ppref(){
   HltTree->SetBranchStatus("LumiBlock", 1);
   HltTree->SetBranchStatus("Run", 1);
 
-  //HltTree->SetBranchStatus("HLT_PPRefDoubleEle15Gsf_v", 1);
-  //HltTree->SetBranchStatus("HLT_PPRefEle15Ele10Gsf_v", 1);
-  //HltTree->SetBranchStatus("HLT_PPRefDoubleEle10Gsf_v", 1);
-  //HltTree->SetBranchStatus("HLT_PPRefDoubleEle15GsfMass50_v", 1);
-  //HltTree->SetBranchStatus("HLT_PPRefEle15Ele10GsfMass50_v", 1);
-  //HltTree->SetBranchStatus("HLT_PPRefDoubleEle10GsfMass50_v", 1);
-
   HltTree->SetBranchStatus(triggers[0].c_str(), 1);
   HltTree->SetBranchStatus(triggers[1].c_str(), 1);
   HltTree->SetBranchStatus(triggers[2].c_str(), 1);
@@ -197,16 +127,6 @@ void HLTperformance_doublee_ppref(){
   HltTree->SetBranchAddress(triggers[1].c_str(), &HLT_PPRefEle15Gsf);
   HltTree->SetBranchAddress(triggers[2].c_str(), &HLT_PPRefEle20Gsf);
 
-
-  //HltTree->SetBranchAddress("HLT_PPRefDoubleEle15Gsf_v", &HLT_PPRefEle10Gsf);
-  //HltTree->SetBranchAddress("HLT_PPRefEle15Ele10Gsf_v", &HLT_PPRefEle15Gsf);
-  //HltTree->SetBranchAddress("HLT_PPRefDoubleEle10Gsf_v", &HLT_PPRefEle20Gsf);
-
-/*
-  HltTree->SetBranchAddress("HLT_PPRefDoubleEle15GsfMass50_v", &HLT_PPRefEle10Gsf);
-  HltTree->SetBranchAddress("HLT_PPRefEle15Ele10GsfMass50_v", &HLT_PPRefEle15Gsf);
-  HltTree->SetBranchAddress("HLT_PPRefDoubleEle10GsfMass50_v", &HLT_PPRefEle20Gsf);
-*/
   HltTree->SetBranchAddress("HLT_PPRefGEDPhoton30_v", &HLT_HIGEDPhoton30);
 
   EventTree->SetBranchStatus("*",0);
@@ -214,7 +134,6 @@ void HLTperformance_doublee_ppref(){
   EventTree->SetBranchStatus("event",1);
   EventTree->SetBranchStatus("lumis",1);
 
-  //EventTree->SetBranchStatus("nPho",1);
   EventTree->SetBranchStatus("nEle",1);
   EventTree->SetBranchStatus("mcPID",1);
 
@@ -286,7 +205,6 @@ void HLTperformance_doublee_ppref(){
   ho20.setupTreeForReading(Tree20);
 
 
-
   Long64_t entriesTmp = EventTree->GetEntries();
   std::cout << "entries in File = " << entriesTmp << std::endl;
 
@@ -305,9 +223,6 @@ void HLTperformance_doublee_ppref(){
     HiTree->GetEntry(j_entry);
 
     entryTrig = emTrig->getEntry(ggHi.run, ggHi.lumis, ggHi.event);
-    //entryTrig = emTrig->getEntry(forest_run, forest_lumi, forest_event);
-
-    //bool eventAdded = em->addEvent(forest_run, forest_lumi, forest_event, j_entry);
     bool eventAdded = em->addEvent(ggHi.run, ggHi.lumis, ggHi.event, j_entry);
     if(!eventAdded) // this event is duplicate, skip this one.
     {
@@ -320,9 +235,7 @@ void HLTperformance_doublee_ppref(){
       continue;
     }
 
-    //emTrig->removeEvent(forest_run, forest_lumi, forest_event);
     emTrig->removeEvent(ggHi.run, ggHi.lumis, ggHi.event);
-
     entriesAnalyzed++;
 
     //cout<<"entryTrig = "<<entryTrig<<endl;
@@ -334,8 +247,6 @@ void HLTperformance_doublee_ppref(){
     float sumIso, maxPt=0, max2Pt=0;
     int maxPt_i = -1;
     int max2Pt_i = -1;
-
-    
 
     std::vector<int> ele_genMatchedIndex;
     for(int iele=0;iele<size(*ggHi.elePt);iele++){
@@ -357,20 +268,14 @@ void HLTperformance_doublee_ppref(){
     }
 
     float dr00;
-
     for(int i=0; i < ggHi.nEle; ++i) {
       int64_t genID = ele_genMatchedIndex[i];
       if (genID == -1) { continue; }
       auto pid = (*ggHi.mcPID)[genID];
       auto mpid = (*ggHi.mcMomPID)[genID];
-      //cout<<"pid = "<<pid<<", mpid = "<<mpid<<", (*ggHi.mcEta)["<<genID<<"] = "<<(*ggHi.mcEta)[genID]<<", (*ggHi.eleEta)["<<i<<"] = "<<(*ggHi.eleEta)[i]<<", (*ggHi.elePt)["<<i<<"] = "<<(*ggHi.elePt)[i]<<endl;
-      
-      //cout<<"pid = "<<pid<<", mpid = "<<mpid<<endl;
       if (std::abs(pid) != 11 || std::abs(mpid) != 23) continue;
       //dr00 = sqrt(((*ggHi.mcEta)[genID]-(*ggHi.eleEta)[i])*((*ggHi.mcEta)[genID]-(*ggHi.eleEta)[i])+((*ggHi.mcPhi)[genID]-(*ggHi.elePhi)[i])*((*ggHi.mcPhi)[genID]-(*ggHi.elePhi)[i]));
       //if(dr00 > dRmax) continue;
-
-
       
       if((*ggHi.elePt)[i]>maxPt){
         max2Pt = maxPt;
@@ -381,9 +286,6 @@ void HLTperformance_doublee_ppref(){
         max2Pt = (*ggHi.elePt)[i]; 
         max2Pt_i = i;
       }
-
-      //cout<<"maxPt_i = "<<maxPt_i<<", max2Pt_i = "<<max2Pt_i<<endl;
-
       /*
       if((*ggHi.eleSCRawEn)[i]/cosh((*ggHi.eleSCEta)[i])>maxPt){
         maxPt = (*ggHi.eleSCRawEn)[i]/cosh((*ggHi.eleSCEta)[i]); 
@@ -395,10 +297,7 @@ void HLTperformance_doublee_ppref(){
     //cout<<"maxPt_i = "<<maxPt_i<<endl;
     //cout<<"phoEt[maxPt_i] = "<<(*ggHi.phoEt)[maxPt_i]<<endl;
 
-    //sumIso = (*ggHi.pho_ecalClusterIsoR3)[maxPt_i]+(*ggHi.pho_hcalRechitIsoR3)[maxPt_i]+(*ggHi.pho_trackIsoR3PtCut20)[maxPt_i];
-
-
-    //cout<<"Photon Selection"<<endl;
+    //cout<<"Electron Selection"<<endl;
 
     float dr10, dr15, dr20;
 
@@ -424,62 +323,57 @@ void HLTperformance_doublee_ppref(){
 
     if(Zmass<60 || Zmass>120) sel_cut = kFALSE;
     //if((*ggHi.mcMomPID)[maxPt_i] != 23) sel_cut = kFALSE;
-
     //if(abs((*ggHi.mcMomMass)[maxPt_i]) < 50) sel_cut = kFALSE;
   
-    if(/*abs((*ggHi.eleEta)[maxPt_i]) < 1.4442 && */sel_cut && sel_cut2/* && hiHF > 3039.47*/){
+    if(sel_cut==kTRUE && sel_cut2==kTRUE){
 
-        hdenom->Fill((*ggHi.elePt)[max2Pt_i],pthat_weight);count0++;
-        //hdenom->Fill((*ggHi.eleSCRawEn)[max2Pt_i]/cosh((*ggHi.eleSCEta)[max2Pt_i]));count0++;
+      hdenom->Fill((*ggHi.elePt)[max2Pt_i],pthat_weight);count0++;
+      //hdenom->Fill((*ggHi.eleSCRawEn)[max2Pt_i]/cosh((*ggHi.eleSCEta)[max2Pt_i]));count0++;
 
-        float n_ele_ho = 0;
+      float n_ele_ho = 0;
+      float dr10temp, dr15temp, dr20temp;
 
-        float dr10temp, dr15temp, dr20temp;
+      dr10 = 10000, dr15 = 10000, dr20 = 10000;
 
-        dr10 = 10000, dr15 = 10000, dr20 = 10000;
-
-        if(HLT_PPRefEle10Gsf>0){
-         n_ele_ho = size(*ho10.eta);
-         //cout<<"n_ele_ho 40 ="<<n_ele_ho<<endl;
-         for(int i=0;i<n_ele_ho;i++){
-          dr10temp = sqrt(((*ho10.eta)[i]-(*ggHi.eleEta)[max2Pt_i])*((*ho10.eta)[i]-(*ggHi.eleEta)[max2Pt_i])+((*ho10.phi)[i]-(*ggHi.elePhi)[max2Pt_i])*((*ho10.phi)[i]-(*ggHi.elePhi)[max2Pt_i]));
-          if (dr10temp < dr10) dr10=dr10temp;
-         }
-        }
-        if(HLT_PPRefEle15Gsf>0){
-          n_ele_ho = size(*ho15.eta);
-          //cout<<"n_ele_ho 50 ="<<n_ele_ho<<endl;
-          for(int i=0;i<n_ele_ho;i++){
-          dr15temp = sqrt(((*ho15.eta)[i]-(*ggHi.eleEta)[max2Pt_i])*((*ho15.eta)[i]-(*ggHi.eleEta)[max2Pt_i])+((*ho15.phi)[i]-(*ggHi.elePhi)[max2Pt_i])*((*ho15.phi)[i]-(*ggHi.elePhi)[max2Pt_i]));
-          if (dr15temp < dr15) dr15=dr15temp;
-         }
-        }
-        if(HLT_PPRefEle20Gsf>0){
-          n_ele_ho = size(*ho20.eta);
-          //cout<<"n_ele_ho 20 ="<<n_ele_ho<<endl;
-          for(int i=0;i<n_ele_ho;i++){
-          dr20temp = sqrt(((*ho20.eta)[i]-(*ggHi.eleEta)[max2Pt_i])*((*ho20.eta)[i]-(*ggHi.eleEta)[max2Pt_i])+((*ho20.phi)[i]-(*ggHi.elePhi)[max2Pt_i])*((*ho20.phi)[i]-(*ggHi.elePhi)[max2Pt_i]));
-          if (dr20temp < dr20) dr20=dr20temp;
-
-         }
-        }
-        
-        //if(HLT_PPRefEle20Gsf>0) cout<<"dr20 ="<<dr20<<endl;
-
-        if(HLT_HIGEDPhoton30>0) countp30++;
-        if(HLT_PPRefEle10Gsf>0 && dr10 < dRmax){hnum10->Fill((*ggHi.elePt)[max2Pt_i],pthat_weight); count10++;}
-        if(HLT_PPRefEle15Gsf>0 && dr15 < dRmax){hnum15->Fill((*ggHi.elePt)[max2Pt_i],pthat_weight); count15++;}
-        if(HLT_PPRefEle20Gsf>0 && dr20 < dRmax){hnum20->Fill((*ggHi.elePt)[max2Pt_i],pthat_weight); count20++;}
-
-        //if(HLT_PPRefEle10Gsf>0 && dr10 < dRmax){hnum10->Fill((*ggHi.eleSCRawEn)[max2Pt_i]/cosh((*ggHi.eleSCEta)[max2Pt_i])); count10++;}
-        //if(HLT_PPRefEle15Gsf>0 && dr15 < dRmax){hnum15->Fill((*ggHi.eleSCRawEn)[max2Pt_i]/cosh((*ggHi.eleSCEta)[max2Pt_i])); count15++;}
-        //if(HLT_PPRefEle20Gsf>0 && dr20 < dRmax){hnum20->Fill((*ggHi.eleSCRawEn)[max2Pt_i]/cosh((*ggHi.eleSCEta)[max2Pt_i])); count20++;}
+      if(HLT_PPRefEle10Gsf>0){
+       n_ele_ho = size(*ho10.eta);
+       //cout<<"n_ele_ho 40 ="<<n_ele_ho<<endl;
+       for(int i=0;i<n_ele_ho;i++){
+        dr10temp = sqrt(((*ho10.eta)[i]-(*ggHi.eleEta)[max2Pt_i])*((*ho10.eta)[i]-(*ggHi.eleEta)[max2Pt_i])+((*ho10.phi)[i]-(*ggHi.elePhi)[max2Pt_i])*((*ho10.phi)[i]-(*ggHi.elePhi)[max2Pt_i]));
+        if (dr10temp < dr10) dr10=dr10temp;
+       }
       }
+      if(HLT_PPRefEle15Gsf>0){
+        n_ele_ho = size(*ho15.eta);
+        //cout<<"n_ele_ho 50 ="<<n_ele_ho<<endl;
+        for(int i=0;i<n_ele_ho;i++){
+        dr15temp = sqrt(((*ho15.eta)[i]-(*ggHi.eleEta)[max2Pt_i])*((*ho15.eta)[i]-(*ggHi.eleEta)[max2Pt_i])+((*ho15.phi)[i]-(*ggHi.elePhi)[max2Pt_i])*((*ho15.phi)[i]-(*ggHi.elePhi)[max2Pt_i]));
+        if (dr15temp < dr15) dr15=dr15temp;
+       }
+      }
+      if(HLT_PPRefEle20Gsf>0){
+        n_ele_ho = size(*ho20.eta);
+        //cout<<"n_ele_ho 20 ="<<n_ele_ho<<endl;
+        for(int i=0;i<n_ele_ho;i++){
+        dr20temp = sqrt(((*ho20.eta)[i]-(*ggHi.eleEta)[max2Pt_i])*((*ho20.eta)[i]-(*ggHi.eleEta)[max2Pt_i])+((*ho20.phi)[i]-(*ggHi.elePhi)[max2Pt_i])*((*ho20.phi)[i]-(*ggHi.elePhi)[max2Pt_i]));
+        if (dr20temp < dr20) dr20=dr20temp;
+       }
+      }
+      
+      //if(HLT_PPRefEle20Gsf>0) cout<<"dr20 ="<<dr20<<endl;
 
+      if(HLT_HIGEDPhoton30>0) countp30++;
+      if(HLT_PPRefEle10Gsf>0 && dr10 < dRmax){hnum10->Fill((*ggHi.elePt)[max2Pt_i],pthat_weight); count10++;}
+      if(HLT_PPRefEle15Gsf>0 && dr15 < dRmax){hnum15->Fill((*ggHi.elePt)[max2Pt_i],pthat_weight); count15++;}
+      if(HLT_PPRefEle20Gsf>0 && dr20 < dRmax){hnum20->Fill((*ggHi.elePt)[max2Pt_i],pthat_weight); count20++;}
+
+      //if(HLT_PPRefEle10Gsf>0 && dr10 < dRmax){hnum10->Fill((*ggHi.eleSCRawEn)[max2Pt_i]/cosh((*ggHi.eleSCEta)[max2Pt_i])); count10++;}
+      //if(HLT_PPRefEle15Gsf>0 && dr15 < dRmax){hnum15->Fill((*ggHi.eleSCRawEn)[max2Pt_i]/cosh((*ggHi.eleSCEta)[max2Pt_i])); count15++;}
+      //if(HLT_PPRefEle20Gsf>0 && dr20 < dRmax){hnum20->Fill((*ggHi.eleSCRawEn)[max2Pt_i]/cosh((*ggHi.eleSCEta)[max2Pt_i])); count20++;}
+    }
   }
 
   std::cout << "count0 = "<<count0<<", count10 = "<<count10<<", count15 = "<<count15<<", count20 = "<<count20 << std::endl;
-
   std::cout << "count photon 30 = "<<countp30<<std::endl;
 
   std::cout << "###" << std::endl;
@@ -507,7 +401,6 @@ void HLTperformance_doublee_ppref(){
   hratio[0]->BayesDivide(hnum10, hdenom);
   hratio[1]->BayesDivide(hnum15, hdenom);
   hratio[2]->BayesDivide(hnum20, hdenom);
-
 
   hratio[0]->GetXaxis()->SetTitle("p^{e}_{T} [GeV/c]");
   //hratio[0]->GetXaxis()->SetTitle("p^{e}_{SC} (Raw) [GeV/c]");
@@ -549,27 +442,8 @@ void HLTperformance_doublee_ppref(){
   l1->SetLineWidth(2);
   l1->SetLineStyle(2);
   l1->Draw();
-/*
-  TLatex *pt = new TLatex(0.78,0.42+endcap_legendpp,"|#eta^{e}| < 1.44");
-  pt->SetTextFont(42);
-  pt->SetNDC(kTRUE);
-  pt->Draw();
-*/
-  //TLatex *pt1 = new TLatex(0.4,0.95,"PbPb, #sqrt{s_{NN}} = 5.02 TeV, Run 3 Simulation");
-  //pt1->SetTextFont(42);
-  //pt1->SetNDC(kTRUE);
-  //pt1->Draw();
-
-  lumi_sqrtS = "pp ref, #sqrt{s_{NN}} = 5.36 TeV, Run 3 Simulation";
 
   CMS_lumi( canvas1, iPeriod, iPos );
-
   gSystem->Exec(("mkdir -p figs/" + folder ).c_str());
-
-  //canvas1->SaveAs("figs/20230919/HLTEff_doublee_ppref_ZB.pdf"); // _mass50
   canvas1->SaveAs(("figs/" + folder + "/HLTEff_" + typeofdata + Mass50txt + ".png").c_str()); //_cent10 _EB _onlyL1
-
-
-
-
 }
