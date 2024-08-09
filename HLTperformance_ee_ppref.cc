@@ -1,3 +1,26 @@
+#include <TFile.h>
+#include <TTree.h>
+#include <TChain.h>
+#include <TMath.h>
+#include <TROOT.h>
+#include <cmath>
+#include <TStyle.h>
+#include <TCanvas.h>
+#include <TLegend.h>
+#include <TAxis.h>
+#include <TSystem.h>
+#include <TLatex.h>
+#include <TLine.h>
+#include <TH1F.h>
+#include <TGraphAsymmErrors.h>
+#include <TFrame.h>
+#include <iostream>
+#include <iomanip>
+#include <vector>
+
+using namespace std;
+
+
 #include "/eos/cms/store/group/phys_heavyions_ops/pchou/ElectroWeak-Jet-Track-Analyses/CorrelationTuple/EventMatcher.h"
 #include "/eos/cms/store/group/phys_heavyions_ops/pchou/ElectroWeak-Jet-Track-Analyses/TreeHeaders/ggHiNtuplizerTree.h"
 #include "/eos/cms/store/group/phys_heavyions_ops/pchou/ElectroWeak-Jet-Track-Analyses/TreeHeaders/hltObjectTree.h"
@@ -6,7 +29,7 @@
 
 void DrawTurnOn(bool is345, int type);
 
-void HLTperformance_ee_ppref(){
+int main(int argc, char *argv[]){
   for(int type=0;type<3;type++){
     DrawTurnOn(false, type);
     DrawTurnOn(true, type);
@@ -396,7 +419,7 @@ void DrawTurnOn(bool is345, int type){
   std::cout << "entriesNotFoundinTrigger  = " << entriesNotFoundinTrigger << std::endl;
   std::cout << "###" << std::endl;
 
-  TCanvas *canvas1 = new TCanvas("canvas1","Comparison of two histograms",1200,800);
+  TCanvas *canvas1 = new TCanvas("canvas1","Comparison of two histograms",1000,800);
   canvas1->SetMargin(0.15, 0.05, 0.15, 0.08);
   canvas1->GetFrame()->SetBorderSize(12);
 

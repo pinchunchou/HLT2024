@@ -1,3 +1,25 @@
+#include <TFile.h>
+#include <TTree.h>
+#include <TChain.h>
+#include <TMath.h>
+#include <TROOT.h>
+#include <cmath>
+#include <TStyle.h>
+#include <TCanvas.h>
+#include <TLegend.h>
+#include <TAxis.h>
+#include <TSystem.h>
+#include <TLatex.h>
+#include <TLine.h>
+#include <TH1F.h>
+#include <TGraphAsymmErrors.h>
+#include <TFrame.h>
+#include <iostream>
+#include <iomanip>
+#include <vector>
+
+using namespace std;
+
 #include "/eos/cms/store/group/phys_heavyions_ops/pchou/ElectroWeak-Jet-Track-Analyses/CorrelationTuple/EventMatcher.h"
 #include "/eos/cms/store/group/phys_heavyions_ops/pchou/ElectroWeak-Jet-Track-Analyses/TreeHeaders/ggHiNtuplizerTree.h"
 #include "/eos/cms/store/group/phys_heavyions_ops/pchou/ElectroWeak-Jet-Track-Analyses/TreeHeaders/hltObjectTree.h"
@@ -6,7 +28,7 @@
 
 void DrawTurnOn(bool isEB, bool is456, int type);
 
-void HLTperformance_QCDPhoton_ppref(){
+int main(int argc, char *argv[]){
   for(int type=0;type<3;type++){
     DrawTurnOn(true, true, type);
     DrawTurnOn(true, false, type);
@@ -49,7 +71,7 @@ void DrawTurnOn(bool isEB, bool is456, int type){
   string hltfile;
 
   if(type==0)
-   hltfile = hltfilebase + "ppref_MC_QCDPhoton_1400v172_Macro_20240808/240809_151230/0000/*.root";
+    hltfile = hltfilebase + "ppref_MC_QCDPhoton_1400v172_Macro_20240808/240809_151230/0000/*.root";
   else if(type==1)
     hltfile = hltfilebase + "ppref_MC_QCDPhoton_1400v172_EG10_Macro_20240808/240809_151330/0000/*.root";
   else
