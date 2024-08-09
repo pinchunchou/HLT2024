@@ -4,15 +4,56 @@
 #include "tdrstyle.C"
 #include "CMS_lumi.C"
 
-void HLTperformance_QCDPhoton_ppref(){
+void DrawTurnOn(bool isEB, bool is456, int type);
 
-  bool isEB = true;
+void HLTperformance_QCDPhoton_ppref(){
+  for(int type=0;type<3;type++){
+    DrawTurnOn(true, true, type);
+    DrawTurnOn(true, false, type);
+    DrawTurnOn(false, true, type);
+    DrawTurnOn(false, false, type);
+  }
+}
+
+void DrawTurnOn(bool isEB, bool is456, int type){
+
   bool isVerbose = false;
 
-  //string typeofdata = "QCDPhoton_ppref_1400v60v2_EG10_dr05_123";
-  string typeofdata = "QCDPhoton_ppref_1400v60v2_EG10_dr05";
+  std::cout<<"isEB = "<<isEB<<", is456 = "<<is456<<", type = "<<type<<std::endl;
 
-  string folder = "20240601";
+  
+  string typeofdata = "QCDPhoton_ppref_1400v172";
+
+  if(type==0)
+    typeofdata += "_dr05";
+  else if(type==1)
+    typeofdata += "_EG10_dr05";
+  else
+    typeofdata += "_noL1_dr05";
+
+
+  if(!is456)
+    typeofdata += "_123";
+
+  string folder = "/eos/user/p/pchou/figs/hlt/20240809";
+
+  //string filebase = "/data/submit/pinchun/HLT2024/";
+  string filebase = "/eos/cms/store/group/phys_heavyions_ops/pchou/";
+
+  //string hltfilebase = "/data/submit/pinchun/HLT2024/";
+  string hltfilebase = "/eos/home-p/pchou/HLT2024/CMSSW_14_0_11/src/HLTrigger/Configuration/test/workstation/HLT_DIGI_CMSSW14011/";
+
+  string frtfile = filebase + "Forest/Pythia8_ppRef_QCDPhoton30_TuneCP5/QCDPhoton_20230524_miniAOD/240417_212103/";
+  //string hltfile = filebase + hltfilebase + "openHLT_ppref_MC_QCDPhoton_1400v60v2_20240531.root";
+
+  string hltfile;
+
+  if(type==0)
+   hltfile = hltfilebase + "ppref_MC_QCDPhoton_1400v172_Macro_20240808/240809_151230/0000/*.root";
+  else if(type==1)
+    hltfile = hltfilebase + "ppref_MC_QCDPhoton_1400v172_EG10_Macro_20240808/240809_151330/0000/*.root";
+  else
+    hltfile = hltfilebase + "ppref_MC_QCDPhoton_1400v172_noL1_Macro_20240808/240809_151417/0000/*.root";
 
   int pt_min = 10, pt_max=90, pt_bin=28;
   int ax_min = 10, ax_max=105;
@@ -27,21 +68,16 @@ void HLTperformance_QCDPhoton_ppref(){
 
   string null_trigger = "HLT_PPRefGEDPhoton10" + EBtxt + "_v";
 
-  vector<string> triggers = vector<string>{"HLT_PPRefGEDPhoton40" + EBtxt + "_v","HLT_PPRefGEDPhoton50" + EBtxt + "_v","HLT_PPRefGEDPhoton60" + EBtxt + "_v"};
-  vector<string> trigger_names = vector<string>{"HI GED Photon" + EBtxt + " 40","HI GED Photon" + EBtxt + " 50","HI GED Photon" + EBtxt + " 60"}; 
-//
-  //vector<string> triggers = vector<string>{"HLT_PPRefGEDPhoton10" + EBtxt + "_v","HLT_PPRefGEDPhoton20" + EBtxt + "_v","HLT_PPRefGEDPhoton30" + EBtxt + "_v"};
-  //vector<string> trigger_names = vector<string>{"HI GED Photon" + EBtxt + " 10","HI GED Photon" + EBtxt + " 20","HI GED Photon" + EBtxt + " 30"}; 
+  vector<string> triggers, trigger_names;
 
-  //string filebase = "/data/submit/pinchun/HLT2024/";
-  string filebase = "/eos/cms/store/group/phys_heavyions_ops/pchou/";
+  if(is456){
+    triggers = vector<string>{"HLT_PPRefGEDPhoton40" + EBtxt + "_v","HLT_PPRefGEDPhoton50" + EBtxt + "_v","HLT_PPRefGEDPhoton60" + EBtxt + "_v"};
+    trigger_names = vector<string>{"HI GED Photon" + EBtxt + " 40","HI GED Photon" + EBtxt + " 50","HI GED Photon" + EBtxt + " 60"}; 
+  }else{
+    triggers = vector<string>{"HLT_PPRefGEDPhoton10" + EBtxt + "_v","HLT_PPRefGEDPhoton20" + EBtxt + "_v","HLT_PPRefGEDPhoton30" + EBtxt + "_v"};
+    trigger_names = vector<string>{"HI GED Photon" + EBtxt + " 10","HI GED Photon" + EBtxt + " 20","HI GED Photon" + EBtxt + " 30"}; 
 
-  //string hltfilebase = "";
-  string hltfilebase = "HLT2024_1/CMSSW_14_0_0/src/HLTrigger/Configuration/test/workstation/";
-
-  string frtfile = filebase + "Forest/Pythia8_ppRef_QCDPhoton30_TuneCP5/QCDPhoton_20230524_miniAOD/240417_212103/";
-  //string hltfile = filebase + hltfilebase + "openHLT_ppref_MC_QCDPhoton_1400v60v2_20240531.root";
-  string hltfile = filebase + hltfilebase + "openHLT_ppref_MC_QCDPhoton_1400v60v2_EG10_20240531l.root";
+  }
 
   setTDRStyle();
   gStyle->SetLegendBorderSize(0);
@@ -466,6 +502,6 @@ void HLTperformance_QCDPhoton_ppref(){
     pt->Draw();
 
   CMS_lumi( canvas1, iPeriod, iPos );
-  gSystem->Exec(("mkdir -p figs/" + folder ).c_str());
-  canvas1->SaveAs(("figs/" + folder + "/HLTEff_" + typeofdata + EBtxt + ".png").c_str()); //_cent10 _EB _onlyL1
+  gSystem->Exec(("mkdir -p " + folder ).c_str());
+  canvas1->SaveAs((folder + "/HLTEff_" + typeofdata + EBtxt + ".png").c_str()); //_cent10 _EB _onlyL1
 }

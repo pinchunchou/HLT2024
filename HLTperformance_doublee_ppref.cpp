@@ -4,15 +4,36 @@
 #include "tdrstyle.C"
 #include "CMS_lumi.C"
 
-void HLTperformance_doublee_ppref(){
+void DrawTurnOn(bool isMass50, int type);
 
-  bool isMass50 = false;
+void HLTperformance_doublee_ppref(){
+  for(int type=0;type<3;type++){
+    DrawTurnOn(false, type);
+    DrawTurnOn(true, type);
+  }
+}
+
+void DrawTurnOn(bool isMass50, int type){
+  
   bool isVerbose = false;
 
   //string typeofdata = "doublee_ppref_1400v60v2_EG10_dr05";
-  string typeofdata = "doublee_ppref_1400v60v2_dr05";
+  //string typeofdata = "doublee_ppref_1400v60v2_dr05";
 
-  string folder = "20240601";
+  string typeofdata = "doublee_ppref_1400v172";
+
+  if(type==0)
+    typeofdata += "_dr05";
+  else if(type==1)
+    typeofdata += "_EG10_dr05";
+  else
+    typeofdata += "_noL1_dr05";
+
+  if(isMass50)
+    typeofdata += "_Mass50";
+
+
+  string folder = "/eos/user/p/pchou/figs/hlt/20240809";
 
   int pt_min = 5, pt_max=50, pt_bin=25;
   int ax_min = 5, ax_max=55;
@@ -31,12 +52,20 @@ void HLTperformance_doublee_ppref(){
   //string filebase = "/data/submit/pinchun/HLT2024/";
   string filebase = "/eos/cms/store/group/phys_heavyions_ops/pchou/";
 
-  //string hltfilebase = "";
-  string hltfilebase = "HLT2024_1/CMSSW_14_0_0/src/HLTrigger/Configuration/test/workstation/";
+ //string hltfilebase = "/data/submit/pinchun/HLT2024/";
+  string hltfilebase = "/eos/home-p/pchou/HLT2024/CMSSW_14_0_11/src/HLTrigger/Configuration/test/workstation/HLT_DIGI_CMSSW14011/";
 
   string frtfile = filebase + "Forest/Zee_20240417_miniAOD/240418_050541/";
-  string hltfile = filebase + hltfilebase + "openHLT_ppref_MC_Zee_1400v60v2_20240531.root";
   //string hltfile = filebase + hltfilebase + "openHLT_ppref_MC_Zee_1400v60v2_EG10_20240531.root";
+
+  string hltfile;
+
+  if(type==0)
+   hltfile = hltfilebase + "ppref_MC_Zee_1400v172_Macro_20240808/240809_151517/0000/*.root";
+  else if(type==1)
+    hltfile = hltfilebase + "ppref_MC_Zee_1400v172_EG10_Macro_20240808/240809_151551/0000/*.root";
+  else
+    hltfile = hltfilebase + "ppref_MC_Zee_1400v172_noL1_Macro_20240808/240809_151625/0000/*.root";
 
   setTDRStyle();
   gStyle->SetLegendBorderSize(0);
@@ -444,6 +473,6 @@ void HLTperformance_doublee_ppref(){
   l1->Draw();
 
   CMS_lumi( canvas1, iPeriod, iPos );
-  gSystem->Exec(("mkdir -p figs/" + folder ).c_str());
-  canvas1->SaveAs(("figs/" + folder + "/HLTEff_" + typeofdata + Mass50txt + ".png").c_str()); //_cent10 _EB _onlyL1
+  gSystem->Exec(("mkdir -p " + folder ).c_str());
+  canvas1->SaveAs((folder + "/HLTEff_" + typeofdata + ".png").c_str()); //_cent10 _EB _onlyL1
 }

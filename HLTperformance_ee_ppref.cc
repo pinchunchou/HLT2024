@@ -4,14 +4,34 @@
 #include "tdrstyle.C"
 #include "CMS_lumi.C"
 
+void DrawTurnOn(bool is345, int type);
+
 void HLTperformance_ee_ppref(){
+  for(int type=0;type<3;type++){
+    DrawTurnOn(false, type);
+    DrawTurnOn(true, type);
+  }
+}
+
+void DrawTurnOn(bool is345, int type){
 
   bool isVerbose = false;
 
-  string typeofdata = "Zee_ppref_1400v60v2_EG10_dr05";
-  //string typeofdata = "Zee_ppref_1400v60v2_dr05_345";
+  std::cout<<"is345 = "<<is345<<", type = "<<type<<std::endl;
 
-  string folder = "20240601";
+  string typeofdata = "Zee_ppref_1400v172";
+
+  if(type==0)
+    typeofdata += "_dr05";
+  else if(type==1)
+    typeofdata += "_EG10_dr05";
+  else
+    typeofdata += "_noL1_dr05";
+
+  if(is345)
+    typeofdata += "_345";
+
+  string folder = "/eos/user/p/pchou/figs/hlt/20240809";
 
   int pt_min = 5, pt_max=80, pt_bin=40;
   int ax_min = 5, ax_max=85;
@@ -19,21 +39,34 @@ void HLTperformance_ee_ppref(){
   float dRmax = 0.5;
   float GendRmax = 0.1;
 
-  vector<string> triggers = vector<string>{"HLT_PPRefEle10Gsf_v","HLT_PPRefEle15Gsf_v","HLT_PPRefEle20Gsf_v"};
-  vector<string> trigger_names = vector<string>{"HLT PPRef Ele 10 Gsf","HLT PPRef Ele 15 Gsf","HLT PPRef Ele 20 Gsf"}; 
-  
-  //vector<string> triggers = vector<string>{"HLT_PPRefEle30Gsf_v","HLT_PPRefEle40Gsf_v","HLT_PPRefEle50Gsf_v"};
-  //vector<string> trigger_names = vector<string>{"HLT PPRef Ele 30 Gsf","HLT PPRef Ele 40 Gsf","HLT PPRef Ele 50 Gsf"}; 
+  vector<string> triggers, trigger_names;
+
+  if(is345){
+    triggers = vector<string>{"HLT_PPRefEle30Gsf_v","HLT_PPRefEle40Gsf_v","HLT_PPRefEle50Gsf_v"};
+    trigger_names = vector<string>{"HLT PPRef Ele 30 Gsf","HLT PPRef Ele 40 Gsf","HLT PPRef Ele 50 Gsf"}; 
+  }else{
+    triggers = vector<string>{"HLT_PPRefEle10Gsf_v","HLT_PPRefEle15Gsf_v","HLT_PPRefEle20Gsf_v"};
+    trigger_names = vector<string>{"HLT PPRef Ele 10 Gsf","HLT PPRef Ele 15 Gsf","HLT PPRef Ele 20 Gsf"}; 
+  }
+
 
   //string filebase = "/data/submit/pinchun/HLT2024/";
   string filebase = "/eos/cms/store/group/phys_heavyions_ops/pchou/";
 
-  //string hltfilebase = "";
-  string hltfilebase = "HLT2024_1/CMSSW_14_0_0/src/HLTrigger/Configuration/test/workstation/";
+  //string hltfilebase = "/data/submit/pinchun/HLT2024/";
+  string hltfilebase = "/eos/home-p/pchou/HLT2024/CMSSW_14_0_11/src/HLTrigger/Configuration/test/workstation/HLT_DIGI_CMSSW14011/";
 
   string frtfile = filebase + "Forest/Zee_20240417_miniAOD/240418_050541/";
   //string hltfile = filebase + hltfilebase + "openHLT_ppref_MC_Zee_1400v60v2_20240531.root";
-  string hltfile = filebase + hltfilebase + "openHLT_ppref_MC_Zee_1400v60v2_EG10_20240531.root";
+
+  string hltfile;
+
+  if(type==0)
+   hltfile = hltfilebase + "ppref_MC_Zee_1400v172_Macro_20240808/240809_151517/0000/*.root";
+  else if(type==1)
+    hltfile = hltfilebase + "ppref_MC_Zee_1400v172_EG10_Macro_20240808/240809_151551/0000/*.root";
+  else
+    hltfile = hltfilebase + "ppref_MC_Zee_1400v172_noL1_Macro_20240808/240809_151625/0000/*.root";
 
   setTDRStyle();
   gStyle->SetLegendBorderSize(0);
@@ -426,6 +459,6 @@ void HLTperformance_ee_ppref(){
   l1->Draw();
 
   CMS_lumi( canvas1, iPeriod, iPos );
-  gSystem->Exec(("mkdir -p figs/" + folder ).c_str());
-  canvas1->SaveAs(("figs/" + folder + "/HLTEff_" + typeofdata + ".png").c_str()); //_cent10 _EB _onlyL1
+  gSystem->Exec(("mkdir -p " + folder ).c_str());
+  canvas1->SaveAs((folder + "/HLTEff_" + typeofdata + ".png").c_str()); //_cent10 _EB _onlyL1
 }
