@@ -526,4 +526,13 @@ void DrawTurnOn(bool isEB, bool is456, int type){
   CMS_lumi( canvas1, iPeriod, iPos );
   gSystem->Exec(("mkdir -p " + folder ).c_str());
   canvas1->SaveAs((folder + "/HLTEff_" + typeofdata + EBtxt + ".png").c_str()); //_cent10 _EB _onlyL1
+
+  delete hdenom;
+  delete hnum40;
+  delete hnum50;
+  delete hnum60;
+  delete hratio[0];
+  delete hratio[1];
+  delete hratio[2];
+  delete canvas1;
 }
