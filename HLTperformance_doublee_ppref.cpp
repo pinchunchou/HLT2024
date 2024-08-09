@@ -41,6 +41,8 @@ void DrawTurnOn(bool isMass50, int type){
   
   bool isVerbose = false;
 
+  std::cout<<"isMass50 = "<<isMass50<<", type = "<<type<<std::endl;
+
   //string typeofdata = "doublee_ppref_1400v60v2_EG10_dr05";
   //string typeofdata = "doublee_ppref_1400v60v2_dr05";
 
