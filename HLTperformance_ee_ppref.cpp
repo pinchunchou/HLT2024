@@ -20,12 +20,11 @@
 
 using namespace std;
 
-
-#include "/eos/cms/store/group/phys_heavyions_ops/pchou/ElectroWeak-Jet-Track-Analyses/CorrelationTuple/EventMatcher.h"
-#include "/eos/cms/store/group/phys_heavyions_ops/pchou/ElectroWeak-Jet-Track-Analyses/TreeHeaders/ggHiNtuplizerTree.h"
-#include "/eos/cms/store/group/phys_heavyions_ops/pchou/ElectroWeak-Jet-Track-Analyses/TreeHeaders/hltObjectTree.h"
-#include "tdrstyle.C"
-#include "CMS_lumi.C"
+#include "include/EventMatcher.h"
+#include "include/ggHiNtuplizerTree.h"
+#include "include/hltObjectTree.h"
+#include "include/tdrstyle.C"
+#include "include/CMS_lumi.C"
 
 void DrawTurnOn(bool is345, int type);
 
