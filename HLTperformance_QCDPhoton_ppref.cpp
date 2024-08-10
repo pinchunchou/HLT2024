@@ -65,8 +65,10 @@ void DrawTurnOn(bool isEB, bool is456, CommandLine CL){
 
   string EBtxt = "";
 
-  if(isEB)
+  if(isEB){
     EBtxt = "_EB";
+    folder += "/EB/"
+  }
 
   string null_trigger = "HLT_PPRefGEDPhoton10" + EBtxt + "_v";
 

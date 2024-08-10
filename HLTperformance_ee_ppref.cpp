@@ -58,6 +58,9 @@ void DrawTurnOn(bool is345, CommandLine CL){
   double GendRmax     = CL.GetDouble("GendRmax", 0.1);
 
 
+  if(is345)
+    typeofdata += "_345";
+
   vector<string> triggers, trigger_names;
 
   if(is345){

@@ -9,15 +9,13 @@
 using namespace std;
 
 #include "include/EventMatcher.h"
+#include "include/CommandLine.h"
 
 int main(int argc, char *argv[]){
 
-  //TFile::Open("/eos/cms/store/group/phys_heavyions/soohwan/Run3_2023/HLT/Merged/openHLT_MBppref_newCaloParam.root");
-  //TTree* HltTree = (TTree*)gFile->Get("hltanalysis/HltTree");
-
-  //string mbpath = "~/eos/HLT_DIGI_CMSSW1321/ppref_MC_MB_1320V32/Macro/CRAB_UserFiles/ppref_MC_MB_1320V32_Macro/230910_112746/0000/*.root";
-
-  string mbpath = "/eos/cms//store/group/phys_heavyions_ops/pchou/HLT_DIGI_CMSSW1321/ppref_MC_MB_1320V32/Macro/CRAB_UserFiles/ppref_MC_MB_1320V32_tag132X2023_Macro/230911_140716/0000/*.root";
+  CommandLine CL(argc, argv);
+  string mbpath = CL.Get("mbpath", "ppref_MC_MB_Macro/*.root");
+  
   TChain *HltTree = new TChain("hltanalysis/HltTree");
   HltTree   ->Add(mbpath.c_str());
 

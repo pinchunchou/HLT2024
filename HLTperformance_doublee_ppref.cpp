@@ -58,6 +58,9 @@ void DrawTurnOn(bool isMass50, CommandLine CL){
   double dRmax        = CL.GetDouble("dRmax", 0.5);
   double GendRmax     = CL.GetDouble("GendRmax", 0.1);
 
+  if(isMass50)
+    typeofdata += "_Mass50";
+
   string Mass50txt = "";
 
   if(isMass50)
