@@ -25,41 +25,38 @@ using namespace std;
 #include "include/hltObjectTree.h"
 #include "include/tdrstyle.C"
 #include "include/CMS_lumi.C"
+#include "include/CommandLine.h"
 
-void DrawTurnOn(bool is345, int type);
+void DrawTurnOn(bool is345, CommandLine CL);
 
 int main(int argc, char *argv[]){
-  for(int type=0;type<3;type++){
-    DrawTurnOn(false, type);
-    DrawTurnOn(true, type);
-  }
+
+  CommandLine CL(argc, argv);
+
+  DrawTurnOn(false, CL);
+  DrawTurnOn(true, CL);
+  
 }
 
-void DrawTurnOn(bool is345, int type){
+void DrawTurnOn(bool is345, CommandLine CL){
 
-  bool isVerbose = false;
+  std::cout<<"is345 = "<<is345<<std::endl;
 
-  std::cout<<"is345 = "<<is345<<", type = "<<type<<std::endl;
+  string typeofdata   = CL.Get("typeofdata", "Zee_ppref");
+  string folder       = CL.Get("folder"    , "/eos/user/p/pchou/figs/hlt/");
+  string frtfile      = CL.Get("forestfile", "Forest/");
+  string hltfile      = CL.Get("hltfile"   , "HLT/*.root");
+  string uptext       = CL.Get("uptext"    , "pp ref, #sqrt{s_{NN}} = 5.36 TeV, 2024 Simulation");
 
-  string typeofdata = "Zee_ppref_1400v172";
+  int pt_min         = CL.GetInt("pt_min", 5);
+  int pt_max         = CL.GetInt("pt_max", 80);
+  int pt_bin         = CL.GetInt("pt_bin", 40);
+  int ax_min         = CL.GetInt("ax_min", 5);
+  int ax_max         = CL.GetInt("ax_max", 85);
 
-  if(type==0)
-    typeofdata += "_dr05";
-  else if(type==1)
-    typeofdata += "_EG10_dr05";
-  else
-    typeofdata += "_noL1_dr05";
+  double dRmax        = CL.GetDouble("dRmax", 0.5);
+  double GendRmax     = CL.GetDouble("GendRmax", 0.1);
 
-  if(is345)
-    typeofdata += "_345";
-
-  string folder = "/eos/user/p/pchou/figs/hlt/20240809";
-
-  int pt_min = 5, pt_max=80, pt_bin=40;
-  int ax_min = 5, ax_max=85;
-
-  float dRmax = 0.5;
-  float GendRmax = 0.1;
 
   vector<string> triggers, trigger_names;
 
@@ -72,31 +69,13 @@ void DrawTurnOn(bool is345, int type){
   }
 
 
-  //string filebase = "/data/submit/pinchun/HLT2024/";
-  string filebase = "/eos/cms/store/group/phys_heavyions_ops/pchou/";
-
-  //string hltfilebase = "/data/submit/pinchun/HLT2024/";
-  string hltfilebase = "/eos/home-p/pchou/HLT2024/CMSSW_14_0_11/src/HLTrigger/Configuration/test/workstation/HLT_DIGI_CMSSW14011/";
-
-  string frtfile = filebase + "Forest/Zee_20240417_miniAOD/240418_050541/";
-  //string hltfile = filebase + hltfilebase + "openHLT_ppref_MC_Zee_1400v60v2_20240531.root";
-
-  string hltfile;
-
-  if(type==0)
-   hltfile = hltfilebase + "ppref_MC_Zee_1400v172_Macro_20240808/240809_151517/0000/*.root";
-  else if(type==1)
-    hltfile = hltfilebase + "ppref_MC_Zee_1400v172_EG10_Macro_20240808/240809_151551/0000/*.root";
-  else
-    hltfile = hltfilebase + "ppref_MC_Zee_1400v172_noL1_Macro_20240808/240809_151625/0000/*.root";
-
   setTDRStyle();
   gStyle->SetLegendBorderSize(0);
 
   writeExtraText = true;       // if extra text
   int iPeriod = 0;    // 1=7TeV, 2=8TeV, 3=7+8TeV, 7=7+8+13TeV, 0=free form (uses lumi_sqrtS)
   int iPos=11;
-  lumi_sqrtS = "pp ref, #sqrt{s_{NN}} = 5.36 TeV, 2024 Simulation";
+  lumi_sqrtS = uptext;
 
   std::cout << "Reading files..." << std::endl;
 

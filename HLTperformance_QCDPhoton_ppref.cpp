@@ -25,63 +25,43 @@ using namespace std;
 #include "include/hltObjectTree.h"
 #include "include/tdrstyle.C"
 #include "include/CMS_lumi.C"
+#include "include/CommandLine.h"
 
-void DrawTurnOn(bool isEB, bool is456, int type);
+void DrawTurnOn(bool isEB, bool is456, CommandLine CL);
 
 int main(int argc, char *argv[]){
-  for(int type=0;type<3;type++){
-    DrawTurnOn(true, true, type);
-    DrawTurnOn(true, false, type);
-    DrawTurnOn(false, true, type);
-    DrawTurnOn(false, false, type);
-  }
+
+  CommandLine CL(argc, argv);
+
+  DrawTurnOn(true, true, CL);
+  DrawTurnOn(true, false, CL);
+  DrawTurnOn(false, true, CL);
+  DrawTurnOn(false, false, CL);
 }
 
-void DrawTurnOn(bool isEB, bool is456, int type){
+void DrawTurnOn(bool isEB, bool is456, CommandLine CL){
 
-  bool isVerbose = false;
+  std::cout<<"isEB = "<<isEB<<", is456 = "<<is456<<std::endl;
 
-  std::cout<<"isEB = "<<isEB<<", is456 = "<<is456<<", type = "<<type<<std::endl;
+  string typeofdata  = CL.Get("typeofdata", "QCDPhoton_ppref");
+  string folder      = CL.Get("folder"    , "/eos/user/p/pchou/figs/hlt/");
+  string frtfile     = CL.Get("forestfile", "Forest/");
+  string hltfile     = CL.Get("hltfile"   , "HLT/*.root");
+  string uptext      = CL.Get("uptext"    , "pp ref, #sqrt{s_{NN}} = 5.36 TeV, 2024 Simulation");
 
-  
-  string typeofdata = "QCDPhoton_ppref_1400v172";
+  int pt_min         = CL.GetInt("pt_min", 10);
+  int pt_max         = CL.GetInt("pt_max", 90);
+  int pt_bin         = CL.GetInt("pt_bin", 28);
+  int ax_min         = CL.GetInt("ax_min", 10);
+  int ax_max         = CL.GetInt("ax_max", 105);
 
-  if(type==0)
-    typeofdata += "_dr05";
-  else if(type==1)
-    typeofdata += "_EG10_dr05";
-  else
-    typeofdata += "_noL1_dr05";
+  double dRmax       = CL.GetDouble("dRmax", 0.5);
+  double GendRmax    = CL.GetDouble("GendRmax", 0.1);
 
+  bool isVerbose     =  CL.GetBool("isVerbose", false);
 
   if(!is456)
-    typeofdata += "_123";
-
-  string folder = "/eos/user/p/pchou/figs/hlt/20240809";
-
-  //string filebase = "/data/submit/pinchun/HLT2024/";
-  string filebase = "/eos/cms/store/group/phys_heavyions_ops/pchou/";
-
-  //string hltfilebase = "/data/submit/pinchun/HLT2024/";
-  string hltfilebase = "/eos/home-p/pchou/HLT2024/CMSSW_14_0_11/src/HLTrigger/Configuration/test/workstation/HLT_DIGI_CMSSW14011/";
-
-  string frtfile = filebase + "Forest/Pythia8_ppRef_QCDPhoton30_TuneCP5/QCDPhoton_20230524_miniAOD/240417_212103/";
-  //string hltfile = filebase + hltfilebase + "openHLT_ppref_MC_QCDPhoton_1400v60v2_20240531.root";
-
-  string hltfile;
-
-  if(type==0)
-    hltfile = hltfilebase + "ppref_MC_QCDPhoton_1400v172_Macro_20240808/240809_151230/0000/*.root";
-  else if(type==1)
-    hltfile = hltfilebase + "ppref_MC_QCDPhoton_1400v172_EG10_Macro_20240808/240809_151330/0000/*.root";
-  else
-    hltfile = hltfilebase + "ppref_MC_QCDPhoton_1400v172_noL1_Macro_20240808/240809_151417/0000/*.root";
-
-  int pt_min = 10, pt_max=90, pt_bin=28;
-  int ax_min = 10, ax_max=105;
-
-  float dRmax = 0.5;
-  float GendRmax = 0.1;
+    typeofdata += "_123"; 
 
   string EBtxt = "";
 
@@ -107,7 +87,7 @@ void DrawTurnOn(bool isEB, bool is456, int type){
   writeExtraText = true;       // if extra text
   int iPeriod = 0;    // 1=7TeV, 2=8TeV, 3=7+8TeV, 7=7+8+13TeV, 0=free form (uses lumi_sqrtS)
   int iPos=11;
-  lumi_sqrtS = "pp ref, #sqrt{s_{NN}} = 5.36 TeV, 2024 Simulation";
+  lumi_sqrtS = uptext;
 
   std::cout << "Reading files..." << std::endl;
 
