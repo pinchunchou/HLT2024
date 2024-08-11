@@ -9,6 +9,7 @@ Currently we have the following codes:
 4. All codes can be compiled and run with `makefile`.
 
 To-do list:
+1. pp ref 2024 trigger rate checks.
 1. Codes for 2024 run 3 PbPb MC.
 2. Backward checks for 2023 run 3 PbPb, MC and data.
 3. Codes for 2024 run 3, PbPb and pp ref data.
