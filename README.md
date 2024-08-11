@@ -1,6 +1,6 @@
 # HLT2024
 
-HLT photon and electron trigger studies for 2024 Run 3.
+CMS heavy ion HLT photon and electron trigger studies for 2024 Run 3.
 
 Currently we have the following codes:
 1. `include` contains all the necessary shared header files
