@@ -337,9 +337,13 @@ void DrawTurnOn(bool is345, CommandLine CL){
     bool sel_cut = kFALSE;
 
     //VETO
-    if(abs((*ggHi.eleEta)[maxPt_i]) < 1.442 && (*ggHi.eleSigmaIEtaIEta_2012)[maxPt_i] < 0.01020 && abs((*ggHi.eledEtaSeedAtVtx)[maxPt_i]) < 0.00327 && abs((*ggHi.eledPhiAtVtx)[maxPt_i]) < 0.06055 && abs((*ggHi.eleEoverPInv)[maxPt_i]) < 0.52688 ) sel_cut = kTRUE;
-    else if(abs((*ggHi.eleEta)[maxPt_i]) > 1.57 && abs((*ggHi.eleEta)[maxPt_i]) < 2.1 && (*ggHi.eleSigmaIEtaIEta_2012)[maxPt_i] < 0.02957 && abs((*ggHi.eledEtaSeedAtVtx)[maxPt_i]) < 0.00490 && abs((*ggHi.eledPhiAtVtx)[maxPt_i]) < 0.09622 && abs((*ggHi.eleEoverPInv)[maxPt_i]) < 0.14600 ) sel_cut = kTRUE;
+    if(abs((*ggHi.eleEta)[maxPt_i]) < 1.4442 && (*ggHi.eleSigmaIEtaIEta_2012)[maxPt_i] < 0.0113 && abs((*ggHi.eledEtaSeedAtVtx)[maxPt_i]) < 0.0037 && abs((*ggHi.eledPhiAtVtx)[maxPt_i]) < 0.1280 && abs((*ggHi.eleEoverPInv)[maxPt_i]) < 0.1065 ) sel_cut = kTRUE;
+    else if(abs((*ggHi.eleEta)[maxPt_i]) > 1.566 && abs((*ggHi.eleEta)[maxPt_i]) < 2.1 && (*ggHi.eleSigmaIEtaIEta_2012)[maxPt_i] < 0.0376 && abs((*ggHi.eledEtaSeedAtVtx)[maxPt_i]) < 0.0074 && abs((*ggHi.eledPhiAtVtx)[maxPt_i]) < 0.2085 && abs((*ggHi.eleEoverPInv)[maxPt_i]) < 0.1138 ) sel_cut = kTRUE;
     else sel_cut = kFALSE;
+
+    if((*ggHi.eleMissHits)[maxPt_i] > 3) sel_cut = kFALSE;
+    if((*ggHi.eleIP3D)[maxPt_i] >= 0.03) sel_cut = kFALSE;
+
     
     if(sel_cut==kTRUE){
 
