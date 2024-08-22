@@ -79,9 +79,12 @@ ExecuteDoubleEle: HLTperformance_doublee_ppref.cpp
 
 RunRate: ExecuteRate
 	mkdir -p log
-	./Execute_HLTrate_ppref \
-	--mbpath "/eos/cms/store/group/phys_heavyions_ops/pchou/HLT_DIGI_CMSSW1321/ppref_MC_MB_1320V32/Macro/CRAB_UserFiles/ppref_MC_MB_1320V32_tag132X2023_Macro/230911_140716/0000/*.root" \
-	> log/rate_ppref.out 2> log/rate_ppref.err < /dev/null &
+	./Execute_HLTrate_ppref --coeff 74243.988 \
+	--mbpath "$(HLTBase)/ppref_MC_ZB1_1400v172_Macro_20240808/240812_200211/0000/*.root" \
+	> log/rate_ppref_ZB1.out 2> log/rate_ppref_ZB1.err < /dev/null &
+	./Execute_HLTrate_ppref --coeff 74243.988 \
+	--mbpath "$(HLTBase)/ppref_MC_ZB1_1400v172_EG10_Macro_20240808/240812_174539/0000/*.root" \
+	> log/rate_ppref_ZB1_EG10.out 2> log/rate_ppref_ZB1_EG10.err < /dev/null &
 
 ExecuteRate: HLTrate_ppref.cpp
 	g++ HLTrate_ppref.cpp -o Execute_HLTrate_ppref `root-config --cflags --libs` -lASImage -std=c++17
