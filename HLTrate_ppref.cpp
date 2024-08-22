@@ -258,8 +258,6 @@ int main(int argc, char *argv[]){
     if(HLT_PPRefL1SingleMu7_Ele20Gsf>0) nMu7Ele20++;
     if(HLT_PPRefL1SingleMu7_GEDPhoton10>0) nMu7Pho10++;
 
-
-
   }
 
   std::cout << "###" << std::endl;
@@ -328,11 +326,11 @@ int main(int argc, char *argv[]){
   //std::cout << "rate: 40e_dup = "<<(double) coeff*n40e_dup/entriesHlt<<"kHz, 50e_dup = "<<(double) coeff*n50e_dup/entriesHlt<<"kHz, 30e_dup = "<<(double) coeff*n30e_dup/entriesHlt<<"kHz"<<std::endl;
   std::cout << "###" << std::endl;
 
-  std::cout << "nMu5Ele20 = "<<nMu5<<", nMu5Pho20 = "<<nMu5Pho20<<", nMu7Ele20 = "<<nMu7Ele20<<", nMu7Pho10 = "<<nMu7Pho10<<std::endl;
+  std::cout << "nMu5Ele20 = "<<nMu5Ele20<<", nMu5Pho20 = "<<nMu5Pho20<<", nMu7Ele20 = "<<nMu7Ele20<<", nMu7Pho10 = "<<nMu7Pho10<<std::endl;
   std::cout << "rate: Mu5Ele20 = "<<(double) coeff*nMu5Ele20/entriesAnalyzedHlt<<"kHz, Mu5Pho20 = "<<(double) coeff*nMu5Pho20/entriesAnalyzedHlt<<"kHz, Mu7Ele20 = "<<(double) coeff*nMu7Ele20/entriesAnalyzedHlt<<"kHz, Mu7Pho10 = "<<(double) coeff*nMu7Pho10/entriesAnalyzedHlt<<"kHz"<<std::endl;
   std::cout << "err:  Mu5Ele20 = "<<(double) coeff*sqrt((double) nMu5Ele20/entriesAnalyzedHlt*(1-nMu5Ele20/entriesAnalyzedHlt)/entriesAnalyzedHlt)<<"kHz, Mu5Pho20 = "<<(double) coeff*sqrt((double) nMu5Pho20/entriesAnalyzedHlt*(1-nMu5Pho20/entriesAnalyzedHlt)/entriesAnalyzedHlt)<<"kHz, Mu7Ele20 = "<<(double) coeff*sqrt((double) nMu7Ele20/entriesAnalyzedHlt*(1-nMu7Ele20/entriesAnalyzedHlt)/entriesAnalyzedHlt)<<"kHz, Mu7Pho10 = "<<(double) coeff*sqrt((double) nMu7Pho10/entriesAnalyzedHlt*(1-nMu7Pho10/entriesAnalyzedHlt)/entriesAnalyzedHlt)<<"kHz"<<std::endl;
-  //std::cout << "nMu5_dup = "<<nMu5_dup<<", nMu5Pho20_dup = "<<nMu5Pho20_dup<<", nMu7Ele20_dup = "<<nMu7Ele20_dup<<", nMu7Pho10_dup = "<<nMu7Pho10_dup<<std::endl;
-  //std::cout << "rate: Mu5_dup = "<<(double) coeff*nMu5_dup/entriesHlt<<"kHz, Mu5Pho20_dup = "<<(double) coeff*nMu5Pho20_dup/entriesHlt<<"kHz, Mu7Ele20_dup = "<<(double) coeff*nMu7Ele20_dup/entriesHlt<<"kHz, Mu7Pho10_dup = "<<(double) coeff*nMu7Pho10_dup/entriesHlt<<"kHz"<<std::endl;
+  //std::cout << "nMu5Ele20_dup = "<<nMu5Ele20_dup<<", nMu5Pho20_dup = "<<nMu5Pho20_dup<<", nMu7Ele20_dup = "<<nMu7Ele20_dup<<", nMu7Pho10_dup = "<<nMu7Pho10_dup<<std::endl;
+  //std::cout << "rate: Mu5Ele20_dup = "<<(double) coeff*nMu5Ele20_dup/entriesHlt<<"kHz, Mu5Pho20_dup = "<<(double) coeff*nMu5Pho20_dup/entriesHlt<<"kHz, Mu7Ele20_dup = "<<(double) coeff*nMu7Ele20_dup/entriesHlt<<"kHz, Mu7Pho10_dup = "<<(double) coeff*nMu7Pho10_dup/entriesHlt<<"kHz"<<std::endl;
   std::cout << "###" << std::endl;
 
 
