@@ -71,6 +71,8 @@ int main(int argc, char *argv[]){
 
   HltTree->SetBranchStatus("HLT_AK4PFJet100_v", 1);
 
+  HltTree->SetBranchStatus("HLT_PPRefDoubleGEDPhoton20_v", 1);
+
   ULong64_t       hlt_event;
   Int_t           hlt_lumi, hlt_run;
   Bool_t HLT_HIGEDPhoton40_EB, HLT_HIGEDPhoton50_EB, HLT_HIGEDPhoton60_EB;
@@ -78,6 +80,8 @@ int main(int argc, char *argv[]){
 
   Bool_t HLT_HIGEDPhoton10_EB, HLT_HIGEDPhoton20_EB, HLT_HIGEDPhoton30_EB;
   Bool_t HLT_HIGEDPhoton10, HLT_HIGEDPhoton20, HLT_HIGEDPhoton30;
+
+  Bool_t HLT_PPRefDoubleGEDPhoton20;
 
   Bool_t HLT_HIEle10Gsf, HLT_HIEle15Gsf, HLT_HIEle20Gsf;
   Bool_t HLT_HIEle30Gsf, HLT_HIEle40Gsf, HLT_HIEle50Gsf;
@@ -131,6 +135,10 @@ int main(int argc, char *argv[]){
   HltTree->SetBranchAddress("HLT_PPRefL1SingleMu7_Ele20Gsf_v", &HLT_PPRefL1SingleMu7_Ele20Gsf);
   HltTree->SetBranchAddress("HLT_PPRefL1SingleMu7_GEDPhoton10_v", &HLT_PPRefL1SingleMu7_GEDPhoton10);
 
+  HltTree->SetBranchAddress("HLT_PPRefDoubleGEDPhoton20_v", &HLT_PPRefDoubleGEDPhoton20);
+
+
+
   EventMatcher* emTrig = 0;
   emTrig = new EventMatcher();
 
@@ -166,6 +174,10 @@ int main(int argc, char *argv[]){
 
   Long64_t nMu5Ele20=0, nMu5Pho20=0, nMu7Ele20=0, nMu7Pho10=0;
   Long64_t nMu5Ele20_dup=0, nMu5Pho20_dup=0, nMu7Ele20_dup=0, nMu7Pho10_dup=0;
+
+  Long64_t nDoublePho20=0, nDoublePho20_dup=0;
+
+
 
 
   for (Long64_t j_entry = 0; j_entry < entriesHlt; ++j_entry){
@@ -210,6 +222,10 @@ int main(int argc, char *argv[]){
     if(HLT_PPRefL1SingleMu5_GEDPhoton20>0) nMu5Pho20_dup++;
     if(HLT_PPRefL1SingleMu7_Ele20Gsf>0) nMu7Ele20_dup++;
     if(HLT_PPRefL1SingleMu7_GEDPhoton10>0) nMu7Pho10_dup++;
+
+    if(HLT_PPRefDoubleGEDPhoton20>0) nDoublePho20_dup++;
+
+
 
     bool eventAdded = emTrig->addEvent(hlt_run, hlt_lumi, hlt_event, j_entry);
     if(!eventAdded) // this event is duplicate, skip this one.
@@ -258,6 +274,10 @@ int main(int argc, char *argv[]){
     if(HLT_PPRefL1SingleMu7_Ele20Gsf>0) nMu7Ele20++;
     if(HLT_PPRefL1SingleMu7_GEDPhoton10>0) nMu7Pho10++;
 
+    if(HLT_PPRefDoubleGEDPhoton20>0) nDoublePho20++;
+
+
+
   }
 
   std::cout << "###" << std::endl;
@@ -294,6 +314,14 @@ int main(int argc, char *argv[]){
   std::cout << "err:  10 = "<<(double) coeff*sqrt((double) n10peb/entriesAnalyzedHlt*(1-n10peb/entriesAnalyzedHlt)/entriesAnalyzedHlt)<<"kHz, 20 = "<<(double) coeff*sqrt((double) n20peb/entriesAnalyzedHlt*(1-n20peb/entriesAnalyzedHlt)/entriesAnalyzedHlt)<<"kHz, 30 = "<<(double) coeff*sqrt((double) n30peb/entriesAnalyzedHlt*(1-n30peb/entriesAnalyzedHlt)/entriesAnalyzedHlt)<<"kHz"<<std::endl;
   //std::cout << "n10peb_dup = "<<n10peb_dup<<", n20peb_dup = "<<n20peb_dup<<", n30peb_dup = "<<n30peb_dup<<std::endl;
   //std::cout << "rate: 10_dup = "<<(double) coeff*n10peb_dup/entriesHlt<<"kHz, 20_dup = "<<(double) coeff*n20peb_dup/entriesHlt<<"kHz, 30_dup = "<<(double) coeff*n30peb_dup/entriesHlt<<"kHz"<<std::endl;
+  std::cout << "###" << std::endl;
+  std::cout << "###" << std::endl;
+
+  std::cout << "DoublePhoton 20 = "<<nDoublePho20<<std::endl;
+  std::cout << "rate: 20 = "<<(double) coeff*nDoublePho20/entriesAnalyzedHlt<<"kHz"<<std::endl;
+  std::cout << "err:  20 = "<<(double) coeff*sqrt((double) nDoublePho20/entriesAnalyzedHlt*(1-nDoublePho20/entriesAnalyzedHlt)/entriesAnalyzedHlt)<<"kHz"<<std::endl;
+  //std::cout << "nDoublePho20_dup = "<<nDoublePho20_dup<<std::endl;
+  //std::cout << "rate: 20_dup = "<<(double) coeff*nDoublePho20_dup/entriesHlt<<"kHz"<<std::endl;
   std::cout << "###" << std::endl;
   std::cout << "###" << std::endl;
 

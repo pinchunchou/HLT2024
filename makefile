@@ -79,12 +79,15 @@ ExecuteDoubleEle: HLTperformance_doublee_ppref.cpp
 
 RunRate: ExecuteRate
 	mkdir -p log
-	./Execute_HLTrate_ppref --coeff 74243.988 \
+	./Execute_HLTrate_ppref --coeff 7240929 \
 	--mbpath "$(HLTBase)/ppref_MC_ZB1_1400v172_Macro_20240808/240812_200211/0000/*.root" \
-	> log/rate_ppref_ZB1.out 2> log/rate_ppref_ZB1.err < /dev/null &
-	./Execute_HLTrate_ppref --coeff 74243.988 \
-	--mbpath "$(HLTBase)/ppref_MC_ZB1_1400v172_EG10_Macro_20240808/240812_174539/0000/*.root" \
-	> log/rate_ppref_ZB1_EG10.out 2> log/rate_ppref_ZB1_EG10.err < /dev/null &
+	> log/rate_ppref_ZB1_new.out 2> log/rate_ppref_ZB1_new.err < /dev/null &
+	#./Execute_HLTrate_ppref --coeff 74243.988 \
+	#--mbpath "$(HLTBase)/ppref_MC_ZB1_1400v172_EG10_Macro_20240808/240812_174539/0000/*.root" \
+	#> log/rate_ppref_ZB1_EG10.out 2> log/rate_ppref_ZB1_EG10.err < /dev/null &
+	#./Execute_HLTrate_ppref --coeff 74243.988 \
+	#--mbpath "$(HLTBase)/openHLT_ppref_ZB219.root" \
+	#> log/rate_ppref_ZB219.out 2> log/rate_ppref_ZB219.err < /dev/null &
 
 ExecuteRate: HLTrate_ppref.cpp
 	g++ HLTrate_ppref.cpp -o Execute_HLTrate_ppref `root-config --cflags --libs` -lASImage -std=c++17
